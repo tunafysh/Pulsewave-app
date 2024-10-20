@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@babel/runtime':
+        specifier: ^7.25.7
+        version: 7.25.7
       '@expo/vector-icons':
         specifier: ^14.0.2
         version: 14.0.4
+      '@react-native/assets-registry':
+        specifier: ^0.75.4
+        version: 0.75.4
       '@react-navigation/native':
         specifier: ^6.0.2
         version: 6.1.18(react-native@0.74.5(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
@@ -864,7 +870,7 @@ packages:
 
   '@expo/bunyan@4.0.1':
     resolution: {integrity: sha512-+Lla7nYSiHZirgK+U/uYzsLv/X+HaJienbD5AKX1UQZHYfWaP+9uuQluRB4GrEVWF0GZ7vEVp/jzaOT9k/SQlg==}
-    engines: {node: '>=0.10.0'}
+    engines: {'0': node >=0.10.0}
 
   '@expo/cli@0.18.30':
     resolution: {integrity: sha512-V90TUJh9Ly8stYo8nwqIqNWCsYjE28GlVFWEhAFCUOp99foiQr8HSTpiiX5GIrprcPoWmlGoY+J5fQA29R4lFg==}
@@ -1144,6 +1150,10 @@ packages:
 
   '@react-native/assets-registry@0.74.87':
     resolution: {integrity: sha512-1XmRhqQchN+pXPKEKYdpJlwESxVomJOxtEnIkbo7GAlaN2sym84fHEGDXAjLilih5GVPpcpSmFzTy8jx3LtaFg==}
+    engines: {node: '>=18'}
+
+  '@react-native/assets-registry@0.75.4':
+    resolution: {integrity: sha512-WX6/LNHwyjislSFM+h3qQjBiPaXXPJW5ZV4TdgNKb6QOPO0g1KGYRQj44cI2xSpZ3fcWrvQFZfQgSMbVK9Sg7A==}
     engines: {node: '>=18'}
 
   '@react-native/babel-plugin-codegen@0.74.87':
@@ -6531,6 +6541,8 @@ snapshots:
       - utf-8-validate
 
   '@react-native/assets-registry@0.74.87': {}
+
+  '@react-native/assets-registry@0.75.4': {}
 
   '@react-native/babel-plugin-codegen@0.74.87(@babel/preset-env@7.25.8(@babel/core@7.25.8))':
     dependencies:
