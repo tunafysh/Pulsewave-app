@@ -1,24 +1,10 @@
 import { Tabs } from 'expo-router';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { Animated } from 'react-native';
-import { SlideInUp, SlideOutDown } from 'react-native-reanimated';
+import * as Filesystem from "expo-file-system";
 
 export default function TabLayout() {
-  const animation = useRef(new Animated.Value(-100)).current;
-
-  useEffect(() => {
-    Animated.timing(animation, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
   return (
-    <Animated.View style={{ transform: [{ translateY: animation }] }}>
       <Tabs
         screenOptions={{
           tabBarLabelStyle: { display: 'none' },
@@ -34,10 +20,14 @@ export default function TabLayout() {
             borderTopStartRadius: 16,
             borderTopEndRadius: 16,
           },
+          tabBarVisibilityAnimationConfig: {
+            show: { animation: 'spring'},
+            hide: { animation: 'spring'},
+          },
           tabBarActiveTintColor: '#199A93',
           headerShown: false,
         }}
-      >
+        >
         <Tabs.Screen
           name="index"
           options={{
@@ -46,7 +36,7 @@ export default function TabLayout() {
               <TabBarIcon size={30} name={focused ? 'home' : 'home-outline'} color="#199A93" />
             ),
           }}
-        />
+          />
         <Tabs.Screen
           name="create"
           options={{
@@ -54,7 +44,7 @@ export default function TabLayout() {
               <TabBarIcon size={30} name={focused ? 'search-circle' : 'search-circle-outline'} color="#199A93" />
             ),
           }}
-        />
+          />
         <Tabs.Screen
           name="notifications"
           options={{
@@ -62,7 +52,7 @@ export default function TabLayout() {
               <TabBarIcon size={30} name="add-outline" color="#199A93" />
             ),
           }}
-        />
+          />
         <Tabs.Screen
           name="friends"
           options={{
@@ -78,8 +68,9 @@ export default function TabLayout() {
               <TabBarIcon size={30} name={focused ? 'code-slash' : 'code-slash-outline'} color="#199A93" />
             ),
           }}
-        />
+          />
       </Tabs>
-    </Animated.View>
   );
 }
+
+

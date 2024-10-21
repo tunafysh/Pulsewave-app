@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { Image, StyleSheet, Platform, Text, useColorScheme, Animated } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { StyleSheet, Text, useColorScheme, Animated } from 'react-native';
 import { ScrollView } from 'react-native';
-import { useAnimatedStyle } from 'react-native-reanimated';
 export default function HomeScreen() {
 
   const colorScheme = useColorScheme();
@@ -27,7 +26,7 @@ const style = StyleSheet.create({
       fadeAnim,
       {
         toValue: 1,
-        duration: 2000,
+        duration: 750,
         useNativeDriver: true,
       }
     ).start();
