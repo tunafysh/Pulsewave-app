@@ -1,9 +1,41 @@
 import { useEffect, useRef } from 'react';
-import { StyleSheet, Text, useColorScheme, Animated } from 'react-native';
-import { ScrollView } from 'react-native';
-export default function HomeScreen() {
+import { StyleSheet, Text, useColorScheme, Animated, ScrollView, Button } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
+
+function checkFileExistsSync(filePath: string) {
+  let fileExists = false;
+  
+  const checkFile = async () => {
+    try {
+      const fileInfo = await FileSystem.getInfoAsync(filePath);
+      fileExists = fileInfo.exists;
+    } catch (error) {
+      console.error("Error checking file existence:", error);
+    }
+  };
+  
+  checkFile().then(() => {
+    console.log(`File exists: ${fileExists}`);
+  });
+  
+  return fileExists;
+}
+
+const createFile = async () => {
+  try {
+    await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + "config.json", `{\n dark: ${useColorScheme() === 'dark'},\n username: "Hanan"\n}\n`, { encoding: FileSystem.EncodingType.UTF8 });
+  } catch (error) {
+    console.error("Error creating file:", error);
+  }
+}
+
+
+export default function HomeScreen() {
+  
   const colorScheme = useColorScheme();
+  const configExists = checkFileExistsSync(FileSystem.documentDirectory + "config.json");
+  
   
 const style = StyleSheet.create({
   homeScreenStyle: {
@@ -11,13 +43,13 @@ const style = StyleSheet.create({
     height: "100%",
     paddingTop: '15%',
     paddingHorizontal: '5%',
-    backgroundColor: colorScheme === 'dark' ? '#030707' : '#FFF',
+    backgroundColor: colorScheme === 'dark' ? '#030707' : '#F8FCFC',
   },
   titleBarStyle: {
     fontWeight: '900',
     fontSize: 32,
     opacity: 0,
-    color: colorScheme == "dark"? "#EEF6F6": ""
+    color: colorScheme == "dark"? "#EEF6F6": "#091111"
   }
 })
   var fadeAnim = useRef(new Animated.Value(0)).current;
@@ -34,7 +66,7 @@ const style = StyleSheet.create({
 
   return (
     <ScrollView style={style.homeScreenStyle}>
-      <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome <Text style={{color: '#199A93'}}>Hanan</Text></Animated.Text>
+      <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome {configExists ? "Back " : ""}<Text style={{color: colorScheme == "dark"? "#199A93": '#42C2BE'}}>Hanan</Text></Animated.Text>
     </ScrollView>   
   );
 }
