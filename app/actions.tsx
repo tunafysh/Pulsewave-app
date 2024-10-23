@@ -21,13 +21,51 @@ export function checkFileExistsSync(filePath: string) {
   return fileExists;
   }
 
-  function createConfig(name: string) {
+  export function createConfig(name: string) {
 
-      const createFile = async () => {
+      const createFile = async (): Promise<"success" | "error"> => {
           try {
-    await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + "config.json", `{\n dark: ${useColorScheme() === 'dark'},\n username: "${name}"\n}\n`, { encoding: FileSystem.EncodingType.UTF8 });
-  } catch (error) {
-    console.error("Error creating file:", error);
-  }
+              await FileSystem.writeAsStringAsync(FileSystem.bundleDirectory + "config.json", JSON.stringify({ dark: true, username: name }), { encoding: FileSystem.EncodingType.UTF8 });
+              return "success";
+          } catch (error) {
+              console.error("Error creating file:", error);
+              return "error";
+          }
+      };
+      createFile().then((result) => {
+          console.log(`File created: ${result}`);
+      });
 }
+
+  
+  export function readConfig(): { dark: boolean, username: string } {
+    const configFile = FileSystem.documentDirectory + "config.json";
+    let config = { dark: false, username: "" };
+    const readFile = async () => {
+      try {
+        const fileContents = await FileSystem.readAsStringAsync(configFile);
+        config = JSON.parse(fileContents) as { dark: boolean, username: string };
+      } catch (error) {
+        console.error("Error reading file:", error);
+      }
+    };
+    readFile().then(() => {
+      console.log(`Config: ${JSON.stringify(config)}`);
+    });
+    return config;
+  }
+
+export function deleteConfig(): Promise<"success" | "error"> {
+  const configFile = FileSystem.documentDirectory + "config.json";
+  const deleteFile = async (): Promise<"success" | "error"> => {
+    try {
+      await FileSystem.deleteAsync(configFile);
+      console.log("Config file deleted successfully.");
+      return "success";
+    } catch (error) {
+      console.error("Error deleting config file:", error);
+      return "error";
+    }
+  };
+  return deleteFile();
 }

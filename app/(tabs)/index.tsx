@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { StyleSheet, Text, useColorScheme, Animated, ScrollView, Button } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-import { checkFileExistsSync } from '../actions';
+import { checkFileExistsSync, readConfig } from '../actions';
 import * as Router from 'expo-router';
 export default function HomeScreen() {
 
-  const router = Router.useRouter();
+  const config = readConfig();
   const colorScheme = useColorScheme();
   const configExists = checkFileExistsSync(FileSystem.documentDirectory + "config.json");
   
@@ -40,7 +40,7 @@ const style = StyleSheet.create({
 
   return (
     <ScrollView style={style.homeScreenStyle}>
-      <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome {configExists ? "Back " : ""}<Text style={{color: colorScheme == "dark"? "#199A93": '#42C2BE'}}>Hanan</Text></Animated.Text>
+      <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome {configExists ? "Back " : ""}<Text style={{color: colorScheme == "dark"? "#199A93": '#42C2BE'}}>{config.username}</Text></Animated.Text>
       <Router.Link href="/getting-started" style={{padding: 10}}><Button title="Go to startup" /></Router.Link>
     </ScrollView>   
   )
