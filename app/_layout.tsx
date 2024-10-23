@@ -38,16 +38,27 @@ export default function RootLayout() {
   lightTheme.colors.background = '#F8FCFC'
   lightTheme.colors.text = '#091111'
 
-  return ( 
-  <ThemeProvider value={colorScheme === 'dark' ? darkTheme : lightTheme}>
-    <Stack screenOptions={{ headerShown: false }}>
-        {checkFileExistsSync(FileSystem.documentDirectory + 'config.json') ? (
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        ) : (
-          <Stack.Screen name="getting-started" />
-        )}
-        <Stack.Screen name="+not-found" />
+  
+  
+  if(!checkFileExistsSync(FileSystem.documentDirectory + 'config.json')){
+    return (
+      <ThemeProvider value={colorScheme === 'dark' ? darkTheme : lightTheme}>
+      <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="getting-started"/>
       </Stack>
-    </ThemeProvider>
-  );
+      </ThemeProvider>
+    )    
+}
+else{
+  return ( 
+  //   <ThemeProvider value={colorScheme === 'dark' ? darkTheme : lightTheme}>
+  // <Stack screenOptions={{ headerShown: false }}>
+  //     <Stack.Screen name="(tabs)" />
+  //     <Stack.Screen name="+not-found" />
+  //   </Stack>
+  // </ThemeProvider>
+    <>
+    </>
+);
+}
 }
