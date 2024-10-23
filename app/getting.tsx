@@ -53,16 +53,15 @@ export default function GettingStartedScreen() {
     return (
         <View style={styles.mainScreen}>
             <Text style={styles.titleBar}>Welcome to Pulse<Text style={{color: useColorScheme() == "dark"? "#3DBDB8": "#42C2BE"}}>wave</Text></Text>
-            <Text style={{color: useColorScheme() == "dark"? "#EEF6F6": "#091111", marginBottom: 30}}>This is a short quick start to get you up and running or whatever. This will take less than a minute.</Text>
             <TextInput style={styles.usernameInput} placeholderTextColor={useColorScheme() == "dark"? "#3DBDB8": "#42C2BE"} onChangeText={setUsername} placeholder="Enter your username"></TextInput>
             <Pressable onPress={() => {
                 console.log(username)
-                if(username == "") return
-                if(checkFileExistsSync(FileSystem.documentDirectory + "config.json")){
-                    deleteConfig()    
-                }
-                createConfig(username)
-                Router.router.push("/")
+                // if(username == "") return
+                // if(checkFileExistsSync(FileSystem.documentDirectory + "config.json")){
+                //     deleteConfig()    
+                // }
+                // createConfig(username)
+                Router.router.push("/(tabs)")
             }} style={styles.startBtn}><Text style={{width: '100%', height: '100%', textAlign: 'center', textAlignVertical: 'center'}}>Get started</Text></Pressable>
             <Text style={{color: useColorScheme() == "dark"? "#EEF6F6": "#091111"}}> By continuing, you agree to the <Text style={{color: useColorScheme() == "dark"? "#3DBDB8": "#42C2BE"}}>Terms and Conditions</Text>.</Text>
         </View>

@@ -40,16 +40,17 @@ export default function TabLayout() {
             ),
           }}
           />
-        <Tabs.Screen
-          name="create"
+          <Tabs.Screen
+          name="search"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'search-circle' : 'search-circle-outline'} color="#199A93" />
+              <TabBarIcon size={30} name={focused ? 'search' : 'search'} color="#199A93" />
+              
             ),
           }}
           />
         <Tabs.Screen
-          name="notifications"
+          name="create"
           options={{
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon size={30} name="add-outline" color="#199A93" />
@@ -57,21 +58,22 @@ export default function TabLayout() {
           }}
           />
         <Tabs.Screen
-          name="friends"
+          name="notifications"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'home' : 'home-outline'} color="#199A93" />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="explore"
-          options={{
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'code-slash' : 'code-slash-outline'} color="#199A93" />
+              <TabBarIcon size={30} name={focused ? 'notifications' : 'notifications-outline'} color="#199A93" />
             ),
           }}
           />
+        <Tabs.Screen
+          name="friends"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon size={30} name={focused ? 'people' : 'people-outline'} color="#199A93" />
+            ),
+          }}
+        />
+        
       </Tabs>
   );
 }

@@ -1,10 +1,11 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, StyleSheet, useColorScheme, Text } from "react-native";
 
 export default function NotificationScreen(){
     const colorScheme = useColorScheme();
 
     const style = StyleSheet.create({
-        homeScreenStyle: {
+        NotificationScreen: {
             width: "100%",
             height: "100%",
             paddingTop: '15%',
@@ -14,14 +15,30 @@ export default function NotificationScreen(){
           titleBarStyle: {
             fontWeight: '900',
             fontSize: 32,
-            opacity: 0,
-            color: colorScheme == "dark"? "#EEF6F6": ""
+            color: colorScheme == "dark"? "#EEF6F6": "#091111"
+          },
+          notificationContainer: {
+            backgroundColor: colorScheme === 'dark' ? '#030707' : '#F8FCFC',
+            padding: 10,
+            paddingTop: 20,
+            borderRadius: 10,
+            marginBottom: 10,
+            flexDirection: 'row',
+          },
+          notificationCardStyle: {
+            flexDirection: 'row',
           }
     })
 
     return(
-    <View style={style.homeScreenStyle}>
+    <View style={style.NotificationScreen}>
         <Text style={style.titleBarStyle}>Notifications</Text>    
+        <View style={style.notificationContainer}>
+        <View style={style.notificationCardStyle}>
+            <Ionicons name="person-circle" size={64} color={colorScheme == "dark"? "#196764": "#98E6E4"} />
+            <Text style={{fontWeight: '900', fontSize: 15, color: "#EEF6F6", textAlignVertical: 'center', marginLeft: 10, height: 64}}>Someone liked your comment <Text style={{color: "#EEF6F6AA"}}>57m ago</Text></Text>
+          </View>
+        </View>
     </View>
     )
 }

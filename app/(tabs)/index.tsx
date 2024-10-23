@@ -3,11 +3,12 @@ import { StyleSheet, Text, useColorScheme, Animated, ScrollView, Button } from '
 import * as FileSystem from 'expo-file-system';
 import { checkFileExistsSync, readConfig } from '../actions';
 import * as Router from 'expo-router';
+import Card from '@/components/Card';
 export default function HomeScreen() {
 
-  const config = readConfig();
   const colorScheme = useColorScheme();
   const configExists = checkFileExistsSync(FileSystem.documentDirectory + "config.json");
+  
   
   
 const style = StyleSheet.create({
@@ -22,6 +23,7 @@ const style = StyleSheet.create({
     fontWeight: '900',
     fontSize: 32,
     opacity: 0,
+    marginBottom: 30,
     color: colorScheme == "dark"? "#EEF6F6": "#091111"
   }
 })
@@ -37,11 +39,10 @@ const style = StyleSheet.create({
       }
     ).start();
   }, [fadeAnim]);
-
   return (
     <ScrollView style={style.homeScreenStyle}>
-      <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome {configExists ? "Back " : ""}<Text style={{color: colorScheme == "dark"? "#199A93": '#42C2BE'}}>{config.username}</Text></Animated.Text>
-      <Router.Link href="/getting-started" style={{padding: 10}}><Button title="Go to startup" /></Router.Link>
+      <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome {configExists ? "Back " : ""}<Text style={{color: colorScheme == "dark"? "#199A93": '#42C2BE'}}>Hanan</Text></Animated.Text>
+      <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
     </ScrollView>   
   )
 }

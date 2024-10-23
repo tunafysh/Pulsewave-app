@@ -44,21 +44,20 @@ export default function RootLayout() {
     return (
       <ThemeProvider value={colorScheme === 'dark' ? darkTheme : lightTheme}>
       <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="getting-started"/>
+      <Stack.Screen name="index"/>
       </Stack>
       </ThemeProvider>
     )    
 }
 else{
   return ( 
-  //   <ThemeProvider value={colorScheme === 'dark' ? darkTheme : lightTheme}>
-  // <Stack screenOptions={{ headerShown: false }}>
-  //     <Stack.Screen name="(tabs)" />
-  //     <Stack.Screen name="+not-found" />
-  //   </Stack>
-  // </ThemeProvider>
-    <>
-    </>
+    <ThemeProvider value={colorScheme === 'dark' ? darkTheme : lightTheme}>
+  <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="+not-found" />
+    </Stack>
+  </ThemeProvider>
+   
 );
 }
 }
