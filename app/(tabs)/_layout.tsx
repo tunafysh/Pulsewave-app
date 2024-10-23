@@ -1,12 +1,12 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import * as Filesystem from "expo-file-system";
 import { useColorScheme } from 'react-native';
+import { checkFileExistsSync } from '../actions';
+import * as Router from "expo-router"
 
 export default function TabLayout() {
-
-  const colorScheme = useColorScheme();
   return (
       <Tabs
         screenOptions={{
@@ -14,8 +14,8 @@ export default function TabLayout() {
           tabBarStyle: {
             elevation: 0,
             position: 'absolute',
-            backgroundColor: colorScheme == "dark"? "#030707": "#F8FCFC",
-            borderColor: colorScheme == "dark"? "#199A93": '#42C2BE',
+            backgroundColor: useColorScheme() == "dark"? "#030707": "#F8FCFC",
+            borderColor: useColorScheme() == "dark"? "#199A93": '#42C2BE',
             borderTopWidth: 3,
             borderLeftWidth: 3,
             borderRightWidth: 3,
@@ -27,7 +27,7 @@ export default function TabLayout() {
             show: { animation: 'spring'},
             hide: { animation: 'spring'},
           },
-          tabBarActiveTintColor: colorScheme == "dark"? "#199A93": '#42C2BE',
+          tabBarActiveTintColor: useColorScheme() == "dark"? "#199A93": '#42C2BE',
           headerShown: false,
         }}
         >
@@ -75,5 +75,4 @@ export default function TabLayout() {
       </Tabs>
   );
 }
-
 

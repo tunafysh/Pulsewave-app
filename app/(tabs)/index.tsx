@@ -1,36 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { StyleSheet, Text, useColorScheme, Animated, ScrollView, Button } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-
-
-function checkFileExistsSync(filePath: string) {
-  let fileExists = false;
-  
-  const checkFile = async () => {
-    try {
-      const fileInfo = await FileSystem.getInfoAsync(filePath);
-      fileExists = fileInfo.exists;
-    } catch (error) {
-      console.error("Error checking file existence:", error);
-    }
-  };
-  
-  checkFile().then(() => {
-    console.log(`File exists: ${fileExists}`);
-  });
-  
-  return fileExists;
-}
-
-const createFile = async () => {
-  try {
-    await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + "config.json", `{\n dark: ${useColorScheme() === 'dark'},\n username: "Hanan"\n}\n`, { encoding: FileSystem.EncodingType.UTF8 });
-  } catch (error) {
-    console.error("Error creating file:", error);
-  }
-}
-
-
+import { checkFileExistsSync } from '../actions';
+import { Link } from 'expo-router';
 export default function HomeScreen() {
   
   const colorScheme = useColorScheme();
@@ -67,6 +39,7 @@ const style = StyleSheet.create({
   return (
     <ScrollView style={style.homeScreenStyle}>
       <Animated.Text  style={[style.titleBarStyle, {opacity: fadeAnim}]}>Welcome {configExists ? "Back " : ""}<Text style={{color: colorScheme == "dark"? "#199A93": '#42C2BE'}}>Hanan</Text></Animated.Text>
+      <Link href="/getting-started" style={{padding: 10}}><Button title="Go to startup" /></Link>
     </ScrollView>   
-  );
+  )
 }
