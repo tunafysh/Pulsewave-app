@@ -18,6 +18,7 @@ export default function Card(props: Props) {
             backgroundColor: colorScheme == "dark"? "#3DBDB8": "#42C2BE",
             textAlignVertical: 'center',
             padding: 10,
+            marginBottom: 15
         },
         image: {
             width: '100%',
@@ -32,12 +33,15 @@ export default function Card(props: Props) {
     })
     return (
         <View style={style.card}>
+            <View style={{flexDirection: 'column', width:"90%", alignItems: 'flex-start', marginBottom: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'flex-start', marginBottom: 10}}>
             <Ionicons name="person-circle" size={48} color={colorScheme == "dark"? "#196764": "#98E6E4"} />
             <Text style={{fontWeight: '900', fontSize: 16, color: "#EEF6F6", marginLeft: 10}}>Hanan <Text style={{fontWeight: '900', fontSize: 16, color: "#EEF6F6AA"}}>@hanan</Text>{'\n'}<Text style= {{color: "#EEF6F6AA"}}>posted on 12/02/2022</Text></Text>
             </View>
             {props.image && <Image src={props.image} style={style.image}/>}
             <Text style={style.text}>{props.children}</Text>
+            <Text>test</Text>
+            </View>
         </View>
     )   
 }

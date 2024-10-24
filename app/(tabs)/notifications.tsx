@@ -23,10 +23,11 @@ export default function NotificationScreen(){
             paddingTop: 20,
             borderRadius: 10,
             marginBottom: 10,
-            flexDirection: 'row',
           },
           notificationCardStyle: {
             flexDirection: 'row',
+            marginVertical : 10,
+            marginRight: 0
           }
     })
 
@@ -34,9 +35,13 @@ export default function NotificationScreen(){
     <View style={style.NotificationScreen}>
         <Text style={style.titleBarStyle}>Notifications</Text>    
         <View style={style.notificationContainer}>
-        <View style={style.notificationCardStyle}>
+        <View style={[style.notificationCardStyle, {borderBottomColor: colorScheme == "dark"? "#199A93": "#42C2BE", borderBottomWidth: 2}]}>
             <Ionicons name="person-circle" size={64} color={colorScheme == "dark"? "#196764": "#98E6E4"} />
             <Text style={{fontWeight: '900', fontSize: 15, color: "#EEF6F6", textAlignVertical: 'center', marginLeft: 10, height: 64}}>Someone liked your comment <Text style={{color: "#EEF6F6AA"}}>57m ago</Text></Text>
+          </View>
+          <View style={style.notificationCardStyle}>
+            <Ionicons name="person-circle" size={64} color={colorScheme == "dark"? "#196764": "#98E6E4"} />
+            <Text style={{fontWeight: '900', fontSize: 15, color: "#EEF6F6", textAlignVertical: 'center', marginLeft: 10, height: 64}}>Someone followed you <Text style={{color: "#EEF6F6AA"}}>32m ago</Text></Text>
           </View>
         </View>
     </View>

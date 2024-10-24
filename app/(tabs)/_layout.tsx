@@ -2,9 +2,10 @@ import { Tabs } from 'expo-router';
 import React, { useEffect } from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import * as Filesystem from "expo-file-system";
-import { useColorScheme } from 'react-native';
+import { useColorScheme, Text, View } from 'react-native';
 import { checkFileExistsSync } from '../actions';
 import * as Router from "expo-router"
+import * as Haptics from "expo-haptics"
 
 export default function TabLayout() {
   return (
@@ -31,12 +32,24 @@ export default function TabLayout() {
           headerShown: false,
         }}
         >
-        <Tabs.Screen
+        <Tabs.Screen 
           name="index"
           options={{
             title: undefined,
             tabBarIcon: ({ focused }) => (
-              <TabBarIcon size={30} name={focused ? 'home' : 'home-outline'} color="#199A93" />
+              <TabBarIcon
+                size={30}
+                name={focused ? 'home' : 'home-outline'}
+                color="#199A93"
+                onPress={() => {
+                  Router.router.push('/');
+                }}
+                onLongPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then(() => {
+                    Router.router.push('/');
+                  })
+                }}
+              />
             ),
           }}
           />
@@ -69,7 +82,8 @@ export default function TabLayout() {
           name="friends"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'people' : 'people-outline'} color="#199A93" />
+              <TabBarIcon size={30} name={focused ? 'people' : 'people-outline'} color="#199A93" onLongPress={() => {
+              }}/>
             ),
           }}
         />
