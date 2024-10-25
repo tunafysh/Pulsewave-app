@@ -17,7 +17,7 @@ export default function FriendsScreen(){
         titleBarStyle: {
           fontWeight: '900',
           fontSize: 32,
-          color: colorScheme == "dark"? "#EEF6F6": "#091111"
+          color: "#fd9970"
         }
   })
 
