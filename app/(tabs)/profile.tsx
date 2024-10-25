@@ -1,6 +1,6 @@
 import { View, StyleSheet, useColorScheme, Text } from "react-native";
 
-export default function Explore(){
+export default function FriendsScreen(){
   const colorScheme = useColorScheme();
 
   const style = StyleSheet.create({
@@ -17,7 +17,7 @@ export default function Explore(){
         titleBarStyle: {
           fontWeight: '900',
           fontSize: 32,
-          color: "#fd9970"
+          color: colorScheme == "dark"? "#EEF6F6": "#091111"
         }
   })
 

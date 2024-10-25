@@ -79,11 +79,10 @@ export default function TabLayout() {
           }}
           />
         <Tabs.Screen
-          name="friends"
+          name="profile"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'people' : 'people-outline'} color="#199A93" onLongPress={() => {
-              }}/>
+              <TabBarIcon size={30} name={focused ? 'person' : 'person-outline'} color="#199A93" />
             ),
           }}
         />

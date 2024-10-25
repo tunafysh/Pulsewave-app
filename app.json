@@ -17,7 +17,6 @@
     },
     "android": {
       "package": "com.tunafysh.pulsewave",
-      
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -33,6 +32,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "98fdbb64-1399-454b-a0c3-4ff512354e13"
+      }
     }
   }
 }

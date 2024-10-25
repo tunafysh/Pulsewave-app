@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, useColorScheme, Animated, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, useColorScheme, Animated, ScrollView, View, Pressable } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import { checkFileExistsSync, readConfig } from '../actions';
 import * as Router from 'expo-router';
 import Card from '@/components/Card';
+import Ionicons from '@expo/vector-icons/Ionicons';
 export default function HomeScreen() {
 
   const colorScheme = useColorScheme();
@@ -26,6 +27,7 @@ const style = StyleSheet.create({
     marginBottom: 30,
     color: colorScheme == "dark"? "#EEF6F6": "#091111",
     borderBottomColor: colorScheme === 'dark' ? '#EEF6F6' : '#F8FCFC',
+    width: "80%"
   }
 })
 
@@ -66,8 +68,8 @@ const style = StyleSheet.create({
   }, [fadeAnim]);
   return (
     <View style={{paddingTop: '15%', backgroundColor: colorScheme === 'dark' ? '#030707' : '#F8FCFC'}}>
-<View style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: 0}}>
-<Animated.Text style={[style.titleBarStyle, { opacity: fadeAnim, paddingLeft: "5%" }]}>
+<View style={{ alignItems: 'center', marginBottom: 0, height: '5%', width: "90%", flexDirection: 'row', justifyContent:"space-between"}}>
+<Animated.Text style={[style.titleBarStyle, { opacity: fadeAnim, paddingLeft: "5%", height:'100%' }]}>
     <Animated.Text>
         {title[0]}
     </Animated.Text>
@@ -75,14 +77,13 @@ const style = StyleSheet.create({
         {title[1]}
     </Animated.Text>
 </Animated.Text>
-
 </View>
     <ScrollView style={style.homeScreenStyle}>
       <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
       <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
       <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
       <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
-      <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
+      <Card image={false}>This is a test just to show it works perfectly but different (i think)</Card>
       <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
       <Card image={false}>This is a test just to show it works perfectly (i think)</Card>
     </ScrollView>   
