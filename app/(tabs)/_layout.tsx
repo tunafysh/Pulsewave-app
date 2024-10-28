@@ -46,7 +46,8 @@ export default function TabLayout() {
                 }}
                 onLongPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then(() => {
-                    Router.router.push('/');
+                    Router.router.replace({ pathname: '/(tabs)/', params: {"replace": "true"} });
+                  })
                   })
                 }}
               />
@@ -57,7 +58,11 @@ export default function TabLayout() {
           name="search"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'search' : 'search'} color="#199A93" />
+              <TabBarIcon size={30} name={focused ? 'search' : 'search'} color="#199A93" onPress={() => Router.router.push('/(tabs)/search')} onLongPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then(() => {
+                  Router.router.replace({ pathname: '/(tabs)/search', params: {"focus": "true"} });
+                })
+              }} />
               
             ),
           }}
@@ -66,7 +71,12 @@ export default function TabLayout() {
           name="create"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name="add-outline" color="#199A93" />
+              <TabBarIcon size={30} name="add-outline" color="#199A93" onPress={() => Router.router.push('/(tabs)/create')} onLongPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then(() => {
+                  Router.router.replace({ pathname: '/(tabs)/create', params: {"camera": "true"} });
+                })
+              
+              } />
             ),
           }}
           />
@@ -74,7 +84,11 @@ export default function TabLayout() {
           name="notifications"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'notifications' : 'notifications-outline'} color="#199A93" />
+              <TabBarIcon size={30} name={focused ? 'notifications' : 'notifications-outline'} color="#199A93" onPress={() => Router.router.push('/(tabs)/notifications')} onLongPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then(() => {
+                  Router.router.replace({ pathname: '/(tabs)/notifications', params: {"clean": "true"} });
+                })
+              }} />
             ),
           }}
           />
@@ -82,7 +96,11 @@ export default function TabLayout() {
           name="profile"
           options={{
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon size={30} name={focused ? 'person' : 'person-outline'} color="#199A93" />
+              <TabBarIcon size={30} name={focused ? 'person' : 'person-outline'} color="#199A93" onPress={() => Router.router.push('/(tabs)/profile')} onLongPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then(() => {
+                  Router.router.replace({ pathname: '/(tabs)/profile', params: {"settings": "true"} });
+                })
+              }} />
             ),
           }}
         />
