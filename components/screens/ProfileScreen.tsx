@@ -6,7 +6,7 @@ export default function ProfileScreen({setPage}: {setPage: Dispatch<SetStateActi
     return (<div className="w-full h-full">
         <div className="w-full h-16 p-4 flex  justify-between ">
             <h1 className="text-2xl font-semibold">Profile</h1>
-            <GearIcon height={24} width={24} className="text-primary select-none" onClick={() => { setPage(Page.Settings) }} />
+            <GearIcon height={24} width={24} className="text-primary select-none cursor-pointer" onClick={() => { setPage(Page.Settings) }} />
         </div>
     </div>);
 }
