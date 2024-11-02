@@ -9,7 +9,7 @@ import SettingsScreen from "@/components/screens/SettingsScreen";
 // import { ModeToggle } from "@/components/themetoggle";
 import { BellIcon, HomeIcon, MagnifyingGlassIcon, PersonIcon, PlusIcon } from "@radix-ui/react-icons";
 import { motion } from "framer-motion"
-import {  useState } from "react";
+import { useState } from "react";
 const isPhone =
   typeof window !== "undefined"
     ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
