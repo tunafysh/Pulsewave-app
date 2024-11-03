@@ -12,7 +12,7 @@ export default function ProfileScreen({settings, setSettings}: { settings: Setti
         // Set initial theme based on system preference or saved setting
         
         setSettings(prev => ({ ...prev, darkmode: theme == "dark" }))
-      }, [setTheme, setSettings])
+      }, [theme, setTheme, setSettings])
 
 
       const handleThemeChange = () => {

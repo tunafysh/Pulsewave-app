@@ -10,7 +10,7 @@ export default function HomeScreen({data}: {data: Settings}) {
         setTimeout(() => {
             setTitlebarText(["Pulse", "wave"])
         }, 4500)
-    }, [])
+    }, [data])
     return (
         <div className="p-4 flex items-center flex-col">
             <motion.h1  animate={{opacity: [0, 1, 1, 0, 0, 1]}} transition={{ duration: 7, delay: 1}} className="mb-6 text-3xl w-full font-semibold">{titlebarText[0]}<span className="text-primary">{titlebarText[1]}</span></motion.h1>
