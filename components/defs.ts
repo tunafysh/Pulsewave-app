@@ -4,5 +4,12 @@ export enum Page {
     Add,
     Notifications,
     Settings,
+    Intro,
     Profile
+}
+
+export interface Settings {
+    darkmode: boolean
+    name: string
+    handle: string
 }
