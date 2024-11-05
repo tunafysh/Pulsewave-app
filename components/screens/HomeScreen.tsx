@@ -16,7 +16,7 @@ export default function HomeScreen({data, setSettings, refreshed}: {data: Settin
         else{
             setTitlebarText(["Pulse", "wave"])
         }
-    }, [data])
+    }, [data, setSettings])
     
     return (
         <div className="p-4 flex items-center flex-col">
