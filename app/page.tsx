@@ -15,7 +15,7 @@ import { useTheme } from "next-themes"
 const isPortrait = () => window.matchMedia("(max-width: 768px) and (max-height: 1024px)").matches;
 
 export default function Home(){
-  const [page, setPage] = useState<number>(Page.Home)
+  const [page, setPage] = useState<number>(Page.Add)
   const { theme } = useTheme()
   const [settings, setSettings] = useState<Settings>({darkmode: theme == "dark"? true: false, name: "Hanan", handle: "hanan"})  
 
@@ -68,7 +68,7 @@ export default function Home(){
         </motion.div>
     ): <></>}
           <motion.div className={`float-right w-full bg-background h-full ${isPortrait() || page == Page.Settings? "": "pl-20"} `} transition={{duration: 0.5, ease: 'easeInOut'}}>
-        {page === Page.Add? (<CreateScreen/>): page === Page.Profile? (<ProfileScreen settings={settings} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen/>): page === Page.Notifications? (<NotificationScreen/>): page === Page.Intro? (<IntroScreen/>): <HomeScreen data={settings}/>}
+        {page === Page.Add? (<CreateScreen data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen/>): page === Page.Notifications? (<NotificationScreen/>): page === Page.Intro? (<IntroScreen/>): <HomeScreen data={settings}/>}
       </motion.div>
     </div>
   );

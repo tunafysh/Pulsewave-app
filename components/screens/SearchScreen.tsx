@@ -3,9 +3,9 @@ import { Input } from "../ui/input";
 
 export default function SearchScreen() {
     return <div className="w-full h-full p-4">
-        <div className="w-full h-14 rounded-md px-2 relative text-accent">
+        <div className="w-full h-14 rounded-md px-2 relative text-primary">
             <MagnifyingGlassIcon className="absolute left-4 top-[26%] transform -translate-y-1/3 h-5 w-5" />
-            <Input placeholder="Search anything" className="border-primary border-2 placeholder:text-accent placeholder:font-semibold pl-8 font-semibold"/>
+            <Input placeholder="Search anything" className="border-primary border-2 placeholder:dark:text-white placeholder:text-black placeholder:font-semibold pl-8 font-semibold"/>
         </div>
         <div className="px-2 w-full">
 

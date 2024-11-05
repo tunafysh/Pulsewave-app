@@ -13,3 +13,11 @@ export interface Settings {
     name: string
     handle: string
 }
+
+export interface CardData {
+    title: string,
+    image: string | false,
+    description: string,
+    publisher: string,
+    handle: string
+}
