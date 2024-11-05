@@ -1,16 +1,31 @@
 import { PersonIcon } from "@radix-ui/react-icons";
-import { Settings } from "../defs";
+import { Page, Settings } from "../defs";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import { Dispatch, SetStateAction } from "react";
 
 function capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export default function CreateScreen({data}: {data: Settings}) {
+export default function CreateScreen({data, setPage, image}: {data: Settings, setPage: Dispatch<SetStateAction<number>>, image: boolean}) {
+    if(image){
 
-    return(
-    <div className="w-full h-full">
+        return(
+            <div className="w-full h-full">
+            <div className="w-full h-16 p-4 flex flex-col">
+                <h1 className="text-3xl font-semibold">Create</h1>
+            </div>
+                <div className="flex w-full h-full justify-center items-center">
+                    <p className="text-[#F54B64] font-bold">Camera feed not implemented yet</p>
+                </div>
+            </div>
+        )
+    }
+    else {
+
+        return(
+            <div className="w-full h-full">
         <div className="w-full h-16 p-4 flex flex-col">
             <h1 className="text-3xl font-semibold">Create</h1>
             <div className="flex w-full justify-center">
@@ -27,7 +42,7 @@ export default function CreateScreen({data}: {data: Settings}) {
                 <p className="dark:text-white/50 text-black/45 font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas similique sequi provident sit iusto at assumenda rem libero cupiditate, facere officia magnam tempore quaerat? Pariatur, accusantium. Odit illo mollitia nulla!</p>
             </div>
             <div id="actions" className=" h-[50px] mt-4 w-full bg-secondary rounded-md flex flex-row items-center justify-end  p-3 gap-2">
-            <Button variant={"destructive"} className="font-bold hover:bg-[#F54B64]/80 bg-[#F54B64]">Cancel</Button>
+            <Button variant={"destructive"} onClick={() => setPage(Page.Home)} className="font-bold hover:bg-[#F54B64]/80 bg-[#F54B64]">Cancel</Button>
             <Button  onClick={() => {toast.warning("Posting is not implemented because there's no database :/")}} variant={"destructive"} className="font-bold bg-[#01C38D] hover:bg-[#01C38D]/80">Post</Button>
             </div>
             </div>
@@ -35,4 +50,5 @@ export default function CreateScreen({data}: {data: Settings}) {
             </div>
     </div>
     );
+}
 }

@@ -12,6 +12,7 @@ export interface Settings {
     darkmode: boolean
     name: string
     handle: string
+    homeloaded: boolean
 }
 
 export interface CardData {

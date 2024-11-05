@@ -4,16 +4,13 @@ import { Switch } from "@/components/ui/switch"
 import { Settings } from "@/components/defs"
 import { Input } from "@/components/ui/input";
 
-export default function ProfileScreen({settings, setSettings}: { settings: Settings, setSettings: Dispatch<SetStateAction<Settings>>}) {
+export default function ProfileScreen({settings, setSettings, easter}: { settings: Settings, setSettings: Dispatch<SetStateAction<Settings>>, easter: boolean}) {
     const { theme, setTheme } = useTheme()
-    
 
     useEffect(() => {
-        // Set initial theme based on system preference or saved setting
-        
+        // Set initial theme based on system preference or saved settings    
         setSettings(prev => ({ ...prev, darkmode: theme == "dark" }))
       }, [theme, setTheme, setSettings])
-
 
       const handleThemeChange = () => {
         setSettings(prev => {
@@ -23,7 +20,15 @@ export default function ProfileScreen({settings, setSettings}: { settings: Setti
         })
       }
 
-    return (<div className="w-full h-full">
+    if (easter){
+      return (
+        <div className="w-full h-full flex justify-center items-center">
+          <p className="text-foreground font-semibold">Version: 0.7.1</p>
+        </div>
+      );
+    }
+    else {
+      return (<div className="w-full h-full">
         <div className="w-full h-16 p-4 flex  justify-between ">
             <h1 className="text-2xl font-semibold">Profile & Settings</h1>
         </div>
@@ -42,4 +47,5 @@ export default function ProfileScreen({settings, setSettings}: { settings: Setti
                 <Input className="w-fit border-2 text-primary" value={settings.handle} onChange={(e) => setSettings(prev => ({ ...prev, handle: e.target.value }))}/>
             </div>
     </div>);
+    }
 }

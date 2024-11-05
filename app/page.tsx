@@ -6,7 +6,6 @@ import NotificationScreen from "@/components/screens/NotificationScreen";
 import ProfileScreen from "@/components/screens/ProfileScreen";
 import IntroScreen from "@/components/screens/IntroScreen";
 import SearchScreen from "@/components/screens/SearchScreen";
-// import { ModeToggle } from "@/components/themetoggle";
 import { BellIcon, HomeIcon, MagnifyingGlassIcon, PersonIcon, PlusIcon } from "@radix-ui/react-icons";
 import { motion } from "framer-motion"
 import { useState } from "react";
@@ -14,16 +13,53 @@ import { useTheme } from "next-themes"
 
 const isPortrait = () => window.matchMedia("(max-width: 768px) and (max-height: 1024px)").matches;
 
-export default function Home(){
-  const [page, setPage] = useState<number>(Page.Add)
-  const { theme } = useTheme()
-  const [settings, setSettings] = useState<Settings>({darkmode: theme == "dark"? true: false, name: "Hanan", handle: "hanan"})  
+interface pageActions {
+  Refreshed: boolean
+  Focused: boolean
+  image: boolean
+  clearnotifs: boolean
+  easter: boolean
+}
 
+export default function Home(){
+  const [page, setPage] = useState<number>(Page.Home)
+  const { theme } = useTheme()
+  const [settings, setSettings] = useState<Settings>({darkmode: theme == "dark"? true: false, name: "Hanan", handle: "hanan", homeloaded: false})  
+  const [pageActions, setPageActions] = useState<pageActions>({Refreshed: false, Focused: false, image: false, clearnotifs: false, easter: false});
   const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
 
   function handleMouseDown(page: number) {
     const timer = setTimeout(() => {
       console.log('Long press detected '+page);
+
+      switch(page){
+        case Page.Add:
+          setPageActions({...pageActions, image: true})
+          navigator.vibrate(100);
+          setPage(Page.Add)
+          break;
+        case Page.Search:
+          setPageActions({...pageActions, Focused: true})
+          navigator.vibrate(100);
+          setPage(Page.Search)
+          break;
+        case Page.Notifications:
+          setPageActions({...pageActions, clearnotifs: true})
+          navigator.vibrate(100);
+          setPage(Page.Notifications)
+          break;
+        case Page.Home:
+          setPageActions({...pageActions, Refreshed: true})
+          navigator.vibrate(100);
+          setPage(Page.Home)
+          break;
+          case Page.Profile:
+          setPageActions({...pageActions, easter: true})
+          navigator.vibrate(100);
+          setPage(Page.Profile)
+          break;
+      }
+
     }, 1000); // 1000 ms for a 1-second long press
     setPressTimer(timer);
   };
@@ -33,6 +69,17 @@ export default function Home(){
     if(pressTimer){
       clearTimeout(pressTimer);
       setPressTimer(null);
+      switch(page){
+        case Page.Add:
+          setPageActions({...pageActions, Focused: false, easter: false})
+          break;
+        case Page.Search:
+          setPageActions({...pageActions, image: false, easter: false})
+          break;
+          case Page.Profile:
+          setPageActions({...pageActions, image: false, Focused: false})
+          break;
+      }
     }else{
       setPage(page)
     }
@@ -68,7 +115,7 @@ export default function Home(){
         </motion.div>
     ): <></>}
           <motion.div className={`float-right w-full bg-background h-full ${isPortrait() || page == Page.Settings? "": "pl-20"} `} transition={{duration: 0.5, ease: 'easeInOut'}}>
-        {page === Page.Add? (<CreateScreen data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen/>): page === Page.Notifications? (<NotificationScreen/>): page === Page.Intro? (<IntroScreen/>): <HomeScreen data={settings}/>}
+        {page === Page.Add? (<CreateScreen setPage={setPage} image={pageActions.image} data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} easter={pageActions.easter} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen focused={pageActions.Focused}/>): page === Page.Notifications? (<NotificationScreen clearnotifs={pageActions.clearnotifs}/>): page === Page.Intro? (<IntroScreen/>): <HomeScreen refreshed={pageActions.Refreshed} setSettings={setSettings} data={settings}/>}
       </motion.div>
     </div>
   );
