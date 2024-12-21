@@ -27,6 +27,7 @@ export default function Home(){
   const [settings, setSettings] = useState<Settings>({darkmode: theme == "dark"? true: false, name: "Hanan", handle: "hanan", homeloaded: false})  
   const [pageActions, setPageActions] = useState<pageActions>({Refreshed: false, Focused: false, image: false, clearnotifs: false, easter: false});
   const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [ firstTime, setFirstTime ] = useState<boolean>(true)
 
   function handleMouseDown(page: number) {
     const timer = setTimeout(() => {
@@ -95,11 +96,15 @@ export default function Home(){
   useEffect(() => {
     isPortrait = window.matchMedia("(max-width: 768px) and (max-height: 1024px)").matches
   })
+  if(firstTime){
+   return <IntroScreen settings={settings} setPage={setPage} setSettings={setSettings} setFirstTime={setFirstTime}/> 
+  }
+  else{
 
-  return (
-    <div className="h-screen bg-background flex flex-row w-screen overflow-x-hidden">
+    return (
+      <div className="h-screen bg-background flex flex-row w-screen overflow-x-hidden">
     {isPortrait && page != (Page.Settings || Page.Intro) ? ( 
-            <motion.div className="fixed flex items-center justify-evenly w-full bg-background h-[9%] bottom-0 z-10 border-t-4 border-x-4 border-primary rounded-t-xl text-primary" initial={{ translateY: 999 }} animate={{ translateY: 0 }} transition={{ duration: 0.5, ease: 'easeInOut' }}>
+      <motion.div className="fixed flex items-center justify-evenly w-full bg-background h-[9%] bottom-0 z-10 border-t-4 border-x-4 border-primary rounded-t-xl text-primary" initial={{ translateY: 999 }} animate={{ translateY: 0 }} transition={{ duration: 0.5, ease: 'easeInOut' }}>
             <motion.li onMouseDown={() => handleMouseDown(Page.Home)} onMouseUp={() => handleMouseUp(Page.Home)} onMouseLeave={handleMouseLeave} className="list-none select-none cursor-pointer" transition={{delay: 0.55}} initial={{translateY: 64}} animate={{translateY: 0}}><HomeIcon width={32} height={32}/></motion.li>
             <motion.li onMouseDown={() => handleMouseDown(Page.Search)} onMouseUp={() => handleMouseUp(Page.Search)} onMouseLeave={handleMouseLeave} className="list-none select-none cursor-pointer" transition={{delay: 0.60}} initial={{translateY: 64}} animate={{translateY: 0}}><MagnifyingGlassIcon width={32} height={32}/></motion.li>
             <motion.li onMouseDown={() => handleMouseDown(Page.Add)} onMouseUp={() => handleMouseUp(Page.Add)} onMouseLeave={handleMouseLeave} className="list-none select-none cursor-pointer" transition={{delay: 0.65}} initial={{translateY: 64}} animate={{translateY: 0}}><PlusIcon width={32} height={32}/></motion.li>
@@ -119,8 +124,9 @@ export default function Home(){
         </motion.div>
     ): <></>}
           <motion.div className={`float-right w-full bg-background h-full ${isPortrait || page == Page.Settings? "": "pl-20"} `} transition={{duration: 0.5, ease: 'easeInOut'}}>
-        {page === Page.Add? (<CreateScreen setPage={setPage} image={pageActions.image} data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} easter={pageActions.easter} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen focused={pageActions.Focused}/>): page === Page.Notifications? (<NotificationScreen clearnotifs={pageActions.clearnotifs}/>): page === Page.Intro? (<IntroScreen/>): <HomeScreen refreshed={pageActions.Refreshed} setSettings={setSettings} data={settings}/>}
+        {page === Page.Add? (<CreateScreen setPage={setPage} image={pageActions.image} data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} easter={pageActions.easter} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen focused={pageActions.Focused}/>): page === Page.Notifications? (<NotificationScreen clearnotifs={pageActions.clearnotifs}/>): <HomeScreen refreshed={pageActions.Refreshed} setSettings={setSettings} data={settings}/>}
       </motion.div>
     </div>
   );
+}
 }
