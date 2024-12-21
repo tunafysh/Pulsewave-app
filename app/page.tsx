@@ -22,12 +22,12 @@ interface pageActions {
 }
 
 export default function Home(){
-  const [page, setPage] = useState<number>(Page.Home)
+  const [ firstTime, setFirstTime ] = useState<boolean>(true)
+  const [page, setPage] = useState<number>(firstTime? Page.Intro: Page.Home)
   const { theme } = useTheme()
   const [settings, setSettings] = useState<Settings>({darkmode: theme == "dark"? true: false, name: "Hanan", handle: "hanan", homeloaded: false})  
   const [pageActions, setPageActions] = useState<pageActions>({Refreshed: false, Focused: false, image: false, clearnotifs: false, easter: false});
   const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
-  const [ firstTime, setFirstTime ] = useState<boolean>(true)
 
   function handleMouseDown(page: number) {
     const timer = setTimeout(() => {
@@ -96,10 +96,6 @@ export default function Home(){
   useEffect(() => {
     isPortrait = window.matchMedia("(max-width: 768px) and (max-height: 1024px)").matches
   })
-  if(firstTime){
-   return <IntroScreen settings={settings} setPage={setPage} setSettings={setSettings} setFirstTime={setFirstTime}/> 
-  }
-  else{
 
     return (
       <div className="h-screen bg-background flex flex-row w-screen overflow-x-hidden">
@@ -124,9 +120,8 @@ export default function Home(){
         </motion.div>
     ): <></>}
           <motion.div className={`float-right w-full bg-background h-full ${isPortrait || page == Page.Settings? "": "pl-20"} `} transition={{duration: 0.5, ease: 'easeInOut'}}>
-        {page === Page.Add? (<CreateScreen setPage={setPage} image={pageActions.image} data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} easter={pageActions.easter} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen focused={pageActions.Focused}/>): page === Page.Notifications? (<NotificationScreen clearnotifs={pageActions.clearnotifs}/>): <HomeScreen refreshed={pageActions.Refreshed} setSettings={setSettings} data={settings}/>}
+          {page === Page.Add? (<CreateScreen setPage={setPage} image={pageActions.image} data={settings}/>): page === Page.Profile? (<ProfileScreen settings={settings} easter={pageActions.easter} setSettings={setSettings}/>): page === Page.Search? (<SearchScreen focused={pageActions.Focused}/>): page === Page.Notifications? (<NotificationScreen clearnotifs={pageActions.clearnotifs}/>): page === Page.Intro? (<IntroScreen settings={settings} setPage={setPage} setSettings={setSettings} setFirstTime={setFirstTime}/>): <HomeScreen refreshed={pageActions.Refreshed} setSettings={setSettings} data={settings}/>}
       </motion.div>
     </div>
   );
-}
 }

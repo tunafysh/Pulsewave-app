@@ -23,7 +23,7 @@ export default function ProfileScreen({settings, setSettings, easter}: { setting
     if (easter){
       return (
         <div className="w-full h-full flex justify-center items-center">
-          <p className="text-foreground font-semibold">Version: 0.7.2</p>
+          <p className="text-foreground font-semibold">Version: 1.0.0</p>
         </div>
       );
     }
