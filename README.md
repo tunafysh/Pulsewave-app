@@ -1,3 +1,3 @@
 # Pulsewave
 
-A lackluster social media app.
+A lackluster music app.
